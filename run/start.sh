@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-cd /react_app \
+echo -e "Start script" \
+&& cd /home/node/app/public \
+&& ls -al \
 && chmod +x env.sh \
 && exec ./env.sh \
-&& exec /usr/bin/supervisord -c /run/supervisord.conf

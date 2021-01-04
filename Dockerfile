@@ -4,7 +4,7 @@ FROM arm64v8/node as base
 # USER react
 # WORKDIR /app
 CMD cat /etc/os-release
-RUN apt -y update && apt -y install nginx-light supervisor
+RUN apt -y update && apt -y install nginx supervisor
 
 # remove nginx sites-enabled
 RUN rm -rf /etc/nginx/sites-enabled/*
@@ -24,7 +24,7 @@ RUN npm install
 
 # add app
 COPY . ./
-ENV REACT_APP_TEST="Hi Marty"
+ENV REACT_APP_TEST="LearningToFly is AWESOME"
 RUN npm run build
 
 FROM base as final_image
@@ -38,4 +38,5 @@ RUN ln -fs /run/nginx.conf /etc/nginx/
 
 EXPOSE 4000/tcp
 # start app
-CMD ["/run/start.sh"]
+RUN exec /run/start.sh
+CMD service nginx start
